@@ -17,4 +17,10 @@ export class AppComponent {
       title: 'Fake example item #3',
     },
   ];
+
+  addItem() {
+    this.todos.push({
+      title: `Fake example item #${this.todos.length + 1}`,
+    });
+  }
 }
