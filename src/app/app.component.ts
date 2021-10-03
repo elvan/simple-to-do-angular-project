@@ -1,26 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TodosService } from './todos.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  todos = [
-    {
-      title: 'Fake example item #1',
-    },
-    {
-      title: 'Fake example item #2',
-    },
-    {
-      title: 'Fake example item #3',
-    },
-  ];
+export class AppComponent implements OnInit {
+  todos: any;
 
-  addItem() {
-    this.todos.push({
-      title: `Fake example item #${this.todos.length + 1}`,
+  constructor(private todosService: TodosService) {}
+
+  ngOnInit(): void {
+    this.getTodos();
+  }
+
+  getTodos(): void {
+    this.todosService.getTodos().subscribe((todos) => {
+      this.todos = todos;
     });
   }
 }
