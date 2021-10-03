@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import * as faker from 'faker';
 import { v4 as uuidv4 } from 'uuid';
 import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
@@ -22,10 +21,6 @@ export class TodoFormComponent implements OnInit {
       this.formMode = todo.id === '' ? 'create' : 'update';
       this.todo = todo;
     });
-  }
-
-  createLorem() {
-    this.todo.title = faker.lorem.sentence();
   }
 
   onSubmit(todoForm: NgForm) {
