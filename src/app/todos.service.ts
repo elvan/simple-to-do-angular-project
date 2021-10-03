@@ -19,7 +19,7 @@ export class TodosService {
 
   constructor() {}
 
-  getTodos(): Observable<Todo[]> {
+  getAllTodos(): Observable<Todo[]> {
     const todos = of(TODOS);
     return todos;
   }
@@ -28,22 +28,22 @@ export class TodosService {
     return this.todos.find((todo) => todo.id === id);
   }
 
-  addItem() {
+  addTodo() {
     this.todos.push({
       id: +this.todos.length + 1 + '',
       title: faker.lorem.sentence(),
     });
   }
 
-  removeItem(id: string) {
+  setFormTodo(todo: Todo) {
+    this.todoSubject.next(todo);
+  }
+
+  removeTodo(id: string) {
     this.todos.forEach((current, index) => {
       if (current.id === id) {
         this.todos.splice(index, 1);
       }
     });
-  }
-
-  editItem(todo: Todo) {
-    this.todoSubject.next(todo);
   }
 }

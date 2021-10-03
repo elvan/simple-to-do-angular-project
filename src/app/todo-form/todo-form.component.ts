@@ -16,10 +16,9 @@ export class TodoFormComponent implements OnInit {
     this.todosService.selectedTodo.subscribe((todo) => {
       this.todo = todo;
     });
-    console.log(this.todo);
   }
 
   addNewItem() {
-    this.todosService.addItem();
+    this.todosService.addTodo();
   }
 }

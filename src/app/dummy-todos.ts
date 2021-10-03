@@ -3,14 +3,14 @@ import { Todo } from './todo';
 export const TODOS: Todo[] = [
   {
     id: '1',
-    title: 'Fake example item #1',
+    title: 'Donec rutrum congue leo eget malesuada.',
   },
   {
     id: '2',
-    title: 'Fake example item #2',
+    title: 'Sed porttitor lectus nibh.',
   },
   {
     id: '3',
-    title: 'Fake example item #3',
+    title: 'Nulla porttitor accumsan tincidunt.',
   },
 ];

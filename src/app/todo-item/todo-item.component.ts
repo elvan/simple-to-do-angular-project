@@ -15,12 +15,12 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {}
 
   editItem() {
-    this.todosService.editItem(this.todo);
+    this.todosService.setFormTodo(this.todo);
   }
 
   removeItem() {
     if (confirm('Are you sure you?')) {
-      this.todosService.removeItem(this.todo.id);
+      this.todosService.removeTodo(this.todo.id);
     }
   }
 }

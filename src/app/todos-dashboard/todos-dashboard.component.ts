@@ -13,7 +13,7 @@ export class TodosDashboardComponent implements OnInit {
   constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.todosService.getTodos().subscribe((todos) => {
+    this.todosService.getAllTodos().subscribe((todos) => {
       this.todos = todos;
     });
   }
