@@ -29,7 +29,7 @@ export class TodoFormComponent implements OnInit {
   }
 
   onSubmit(todoForm: NgForm) {
-    if (this.todo.title === '') {
+    if (todoForm.value.title === '') {
       return;
     }
 
