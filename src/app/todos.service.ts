@@ -36,8 +36,8 @@ export class TodosService {
 
   updateTodo(todo: Todo) {
     this.todos.forEach((current, index) => {
-      if (current.id === this.todoSubject.value.id) {
-        this.todos[index] = this.todoSubject.value;
+      if (current.id === todo.id) {
+        this.todos[index] = todo;
       }
     });
   }
