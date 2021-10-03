@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as faker from 'faker';
 import { v4 as uuidv4 } from 'uuid';
 import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
@@ -17,6 +18,10 @@ export class TodoFormComponent implements OnInit {
     this.todosService.selectedTodo.subscribe((todo) => {
       this.todo = todo;
     });
+  }
+
+  createLorem() {
+    this.todo.title = faker.lorem.sentence();
   }
 
   onSubmit() {
