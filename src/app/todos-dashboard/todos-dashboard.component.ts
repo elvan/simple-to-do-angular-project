@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
 
 @Component({
-  selector: 'app-todo-dashboard',
-  templateUrl: './todo-dashboard.component.html',
-  styleUrls: ['./todo-dashboard.component.css'],
+  selector: 'app-todos-dashboard',
+  templateUrl: './todos-dashboard.component.html',
+  styleUrls: ['./todos-dashboard.component.css'],
 })
-export class TodoDashboardComponent implements OnInit {
-  todos: any;
+export class TodosDashboardComponent implements OnInit {
+  todos!: Todo[];
 
   constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.getTodos();
-  }
-
-  getTodos(): void {
     this.todosService.getTodos().subscribe((todos) => {
       this.todos = todos;
     });

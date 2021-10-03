@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
 
 @Component({
@@ -7,13 +8,17 @@ import { TodosService } from '../todos.service';
   styleUrls: ['./todo-item.component.css'],
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo!: any;
+  @Input() todo!: Todo;
 
   constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {}
 
-  removeTodo() {
+  editItem() {
+    this.todosService.editItem(this.todo);
+  }
+
+  removeItem() {
     if (confirm('Are you sure you?')) {
       this.todosService.removeItem(this.todo.id);
     }

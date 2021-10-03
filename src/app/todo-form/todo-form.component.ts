@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Todo } from '../todo';
 import { TodosService } from '../todos.service';
 
 @Component({
@@ -7,11 +8,18 @@ import { TodosService } from '../todos.service';
   styleUrls: ['./todo-form.component.css'],
 })
 export class TodoFormComponent implements OnInit {
+  todo!: Todo;
+
   constructor(private todosService: TodosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todosService.selectedTodo.subscribe((todo) => {
+      this.todo = todo;
+    });
+    console.log(this.todo);
+  }
 
-  handleSubmit() {
+  addNewItem() {
     this.todosService.addItem();
   }
 }
