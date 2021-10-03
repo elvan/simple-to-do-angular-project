@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as faker from 'faker';
 import { Observable, of } from 'rxjs';
 import { TODOS } from './dummy-todos';
 import { Todo } from './todo';
@@ -19,7 +20,7 @@ export class TodosService {
   addItem() {
     this.todos.push({
       id: this.todos.length + 1,
-      title: `Fake example item #${this.todos.length + 1}`,
+      title: faker.lorem.sentence(),
     });
   }
 
