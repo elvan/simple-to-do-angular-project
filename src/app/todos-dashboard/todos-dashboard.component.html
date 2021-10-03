@@ -3,7 +3,8 @@
   <div class="jumbotron p-3 shadow-sm">
     <app-todo-form></app-todo-form>
   </div>
-  <ul class="list-group pb-5">
+  <ul *ngIf="todos.length > 0" class="list-group pb-5">
     <app-todo-item *ngFor="let todo of todos" [todo]="todo"></app-todo-item>
   </ul>
+  <span *ngIf="todos.length === 0" class="text-muted">No todos yet</span>
 </div>

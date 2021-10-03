@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()">
+<form #todoForm="ngForm" (ngSubmit)="onSubmit(todoForm)">
   <div class="d-flex align-items-center">
     <input
       [(ngModel)]="todo.title"
@@ -10,12 +10,14 @@
       style="flex: 1"
     />
     <button
-      class="btn btn-secondary mr-1"
-      type="button"
-      (click)="createLorem()"
+      [ngClass]="formMode === 'create' ? 'btn-primary' : 'btn-success'"
+      class="btn mr-1"
+      type="submit"
     >
+      {{ formMode === 'create' ? 'Add New Item' : 'Update Item' }}
+    </button>
+    <button class="btn btn-secondary" type="button" (click)="createLorem()">
       Lorem
     </button>
-    <button class="btn btn-primary" type="submit">Add New Item</button>
   </div>
 </form>

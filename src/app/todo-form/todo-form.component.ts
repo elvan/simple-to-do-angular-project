@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import * as faker from 'faker';
 import { v4 as uuidv4 } from 'uuid';
 import { Todo } from '../todo';
@@ -14,8 +15,11 @@ export class TodoFormComponent implements OnInit {
 
   constructor(private todosService: TodosService) {}
 
+  formMode: 'create' | 'update' = 'create';
+
   ngOnInit(): void {
     this.todosService.selectedTodo.subscribe((todo) => {
+      this.formMode = todo.id === '' ? 'create' : 'update';
       this.todo = todo;
     });
   }
@@ -24,27 +28,26 @@ export class TodoFormComponent implements OnInit {
     this.todo.title = faker.lorem.sentence();
   }
 
-  onSubmit() {
+  onSubmit(todoForm: NgForm) {
     if (this.todo.title === '') {
       return;
     }
 
-    if (this.todo.id === '') {
-      console.log('create');
-
+    if (this.formMode === 'create') {
       const newTodo = {
         id: uuidv4(),
         title: this.todo.title,
       };
       this.todosService.addTodo(newTodo);
     } else {
-      console.log('update');
-
       const updatedTodo = {
         id: this.todo.id,
         title: this.todo.title,
       };
       this.todosService.updateTodo(updatedTodo);
     }
+
+    this.formMode = 'create';
+    todoForm.reset();
   }
 }
