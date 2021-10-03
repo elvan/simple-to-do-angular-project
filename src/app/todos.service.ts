@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as faker from 'faker';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TODOS } from './dummy-todos';
 import { Todo } from './todo';
@@ -27,15 +26,20 @@ export class TodosService {
     return this.todos.find((todo) => todo.id === id);
   }
 
-  addTodo() {
-    this.todos.push({
-      id: +this.todos.length + 1 + '',
-      title: faker.lorem.sentence(),
-    });
+  addTodo(todo: Todo) {
+    this.todos.push(todo);
   }
 
   setFormTodo(todo: Todo) {
     this.todoSubject.next(todo);
+  }
+
+  updateTodo(todo: Todo) {
+    this.todos.forEach((current, index) => {
+      if (current.id === this.todoSubject.value.id) {
+        this.todos[index] = this.todoSubject.value;
+      }
+    });
   }
 
   removeTodo(id: string) {

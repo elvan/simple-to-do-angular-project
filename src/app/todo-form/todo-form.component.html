@@ -1,4 +1,4 @@
-<form>
+<form (ngSubmit)="onSubmit()">
   <div class="d-flex align-items-center">
     <input
       [(ngModel)]="todo.title"
@@ -9,8 +9,6 @@
       type="text"
       style="flex: 1"
     />
-    <button class="btn btn-primary" type="button" (click)="addNewItem()">
-      Add New Item
-    </button>
+    <button class="btn btn-primary" type="submit">Add New Item</button>
   </div>
 </form>
