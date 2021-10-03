@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -8,7 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TodoItemComponent implements OnInit {
   @Input() todo!: any;
 
-  constructor() {}
+  constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {}
+
+  removeTodo() {
+    if (confirm('Are you sure you?')) {
+      this.todosService.removeItem(this.todo.id);
+    }
+  }
 }

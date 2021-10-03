@@ -22,4 +22,12 @@ export class TodosService {
       title: `Fake example item #${this.todos.length + 1}`,
     });
   }
+
+  removeItem(id: number) {
+    this.todos.forEach((current, index) => {
+      if (current.id === id) {
+        this.todos.splice(index, 1);
+      }
+    });
+  }
 }
