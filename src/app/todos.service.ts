@@ -20,8 +20,7 @@ export class TodosService {
   constructor() {}
 
   getAllTodos(): Observable<Todo[]> {
-    const todos = of(TODOS);
-    return todos;
+    return of(this.todos);
   }
 
   getTodo(id: string) {
