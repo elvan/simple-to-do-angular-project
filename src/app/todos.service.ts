@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { TODOS } from './dummy-todos';
 import { Todo } from './todo';
+
+const LOCAL_STORAGE_KEY = 'simple-to-do';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
-  todos: Todo[] = TODOS;
+  todos: Todo[] = [];
 
   private todoSubject = new BehaviorSubject<Todo>({
     id: '',
@@ -19,15 +20,20 @@ export class TodosService {
   constructor() {}
 
   getAllTodos(): Observable<Todo[]> {
-    return of(this.todos);
-  }
+    const todos = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (todos) {
+      this.todos = JSON.parse(todos);
+    } else {
+      this.todos = [];
+    }
 
-  getTodo(id: string) {
-    return this.todos.find((todo) => todo.id === id);
+    return of(this.todos);
   }
 
   addTodo(todo: Todo) {
     this.todos.push(todo);
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.todos));
   }
 
   updateTodo(todo: Todo) {
@@ -36,6 +42,8 @@ export class TodosService {
         this.todos[index] = todo;
       }
     });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.todos));
   }
 
   removeTodo(id: string) {
@@ -44,6 +52,8 @@ export class TodosService {
         this.todos.splice(index, 1);
       }
     });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.todos));
   }
 
   setFormTodo(todo: Todo) {
