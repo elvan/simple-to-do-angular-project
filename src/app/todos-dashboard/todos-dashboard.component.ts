@@ -8,7 +8,9 @@ import { TodosService } from '../todos.service';
   styleUrls: ['./todos-dashboard.component.css'],
 })
 export class TodosDashboardComponent implements OnInit {
-  todos!: Todo[];
+  todos: Todo[] = [];
+
+  selectedTodo!: Todo;
 
   constructor(private todosService: TodosService) {}
 

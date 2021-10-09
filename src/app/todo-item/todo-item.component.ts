@@ -10,9 +10,15 @@ import { TodosService } from '../todos.service';
 export class TodoItemComponent implements OnInit {
   @Input() todo!: Todo;
 
+  @Input() selectedTodo!: Todo;
+
   constructor(private todosService: TodosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todosService.selectedTodo.subscribe((selectedTodo) => {
+      this.selectedTodo = selectedTodo;
+    });
+  }
 
   editItem() {
     this.todosService.setFormTodo(this.todo);
