@@ -12,14 +12,19 @@ import { TodosService } from '../todos.service';
 export class TodoFormComponent implements OnInit {
   todo!: Todo;
 
+  title: string = '';
+
   constructor(private todosService: TodosService) {}
 
   formMode: 'create' | 'update' = 'create';
 
   ngOnInit(): void {
     this.todosService.selectedTodo.subscribe((todo) => {
-      this.formMode = todo.id === '' ? 'create' : 'update';
-      this.todo = todo;
+      if (todo.id !== null) {
+        this.todo = todo;
+        this.formMode = 'update';
+        this.title = todo.title;
+      }
     });
   }
 
@@ -31,13 +36,13 @@ export class TodoFormComponent implements OnInit {
     if (this.formMode === 'create') {
       const newTodo = {
         id: uuidv4(),
-        title: this.todo.title,
+        title: todoForm.value.title,
       };
       this.todosService.addTodo(newTodo);
     } else {
       const updatedTodo = {
         id: this.todo.id,
-        title: this.todo.title,
+        title: todoForm.value.title,
       };
       this.todosService.updateTodo(updatedTodo);
     }
