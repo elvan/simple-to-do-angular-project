@@ -30,10 +30,6 @@ export class TodosService {
     this.todos.push(todo);
   }
 
-  setFormTodo(todo: Todo) {
-    this.todoSubject.next(todo);
-  }
-
   updateTodo(todo: Todo) {
     this.todos.forEach((current, index) => {
       if (current.id === todo.id) {
@@ -47,6 +43,17 @@ export class TodosService {
       if (current.id === id) {
         this.todos.splice(index, 1);
       }
+    });
+  }
+
+  setFormTodo(todo: Todo) {
+    this.todoSubject.next(todo);
+  }
+
+  clearSelectedTodo() {
+    this.todoSubject.next({
+      id: '',
+      title: '',
     });
   }
 }

@@ -8,13 +8,31 @@
       class="form-control mr-3"
       type="text"
       style="flex: 1"
+      required
     />
     <button
-      [ngClass]="formMode === 'create' ? 'btn-primary' : 'btn-success'"
-      class="btn mr-1"
+      *ngIf="formMode === 'create'"
+      [disabled]="todoForm.invalid"
+      class="btn btn-primary mr-1"
       type="submit"
     >
-      {{ formMode === 'create' ? 'Add New Item' : 'Update Item' }}
+      Add New Item
+    </button>
+    <button
+      *ngIf="formMode === 'update'"
+      [disabled]="todoForm.invalid"
+      class="btn btn-success mr-1"
+      type="submit"
+    >
+      Update
+    </button>
+    <button
+      *ngIf="formMode === 'update'"
+      class="btn btn-light mr-1"
+      type="button"
+      (click)="onCancel()"
+    >
+      Cancel
     </button>
   </div>
 </form>

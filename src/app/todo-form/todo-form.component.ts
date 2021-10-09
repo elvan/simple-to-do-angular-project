@@ -19,11 +19,11 @@ export class TodoFormComponent implements OnInit {
   formMode: 'create' | 'update' = 'create';
 
   ngOnInit(): void {
-    this.todosService.selectedTodo.subscribe((todo) => {
-      if (todo.id !== null) {
-        this.todo = todo;
+    this.todosService.selectedTodo.subscribe((selectedTodo) => {
+      if (selectedTodo.id !== '') {
+        this.todo = selectedTodo;
         this.formMode = 'update';
-        this.title = todo.title;
+        this.title = selectedTodo.title;
       }
     });
   }
@@ -49,5 +49,11 @@ export class TodoFormComponent implements OnInit {
 
     this.formMode = 'create';
     todoForm.reset();
+  }
+
+  onCancel() {
+    this.formMode = 'create';
+    this.title = '';
+    this.todosService.clearSelectedTodo();
   }
 }
